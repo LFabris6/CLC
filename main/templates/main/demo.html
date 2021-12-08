@@ -1,0 +1,84 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <title>Demo</title>
+
+    <style type="text/css">
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const uluru = { lat: 45.0812, lng: 13.6387 };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        
+      }
+    </script>
+
+  </head>
+  <body>
+
+<div class="text-center">
+    <h1>Naruči iz izbora Restorana!</h1>
+    <br>
+    <button  class=" btn btn-info"onclick="getLocation()">Lociraj</button>
+    <p class="text-muted">Provijerite lokaciju na mapi te označite želite li ju spremiti za buduće dostave.</p>
+</div>
+
+
+<script>
+    var x = document.getElementById("demo");
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(Map);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    
+    function Map(position) {
+        // The location of Uluru
+        const uluru = { lat: position.coords.latitude, lng: position.coords.longitude };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 15,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+      }
+
+</script>
+
+</div>
+
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0zenvZnCkMVJNRXDrU-oSfSLos56B6iU&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+    <br>
+    <div class="text-center">
+        <button class="btn btn-success"> Spremi Lokaciju </button>
+    </div>
+    
+
+  </body>
+</html>
