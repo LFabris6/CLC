@@ -7,7 +7,6 @@ from .forms import NewUserForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 
-from .funkcije import signup, signin
 
 def main(request):
     args = {}
