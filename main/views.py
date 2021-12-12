@@ -8,8 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from .models import Korisnik
 
-from .funkcije import signup, signin
-
 
 
 def test(request):
