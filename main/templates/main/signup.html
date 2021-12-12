@@ -1,6 +1,13 @@
 
 {% extends "main/navbar.html" %}
 
+{%load static%}
+
+{%block imports%}
+<link href="{%static 'css/sign/util.css'%}" rel="stylesheet" />
+<link href="{%static 'css/sign/main1.css'%}" rel="stylesheet" />
+{%endblock%}
+
 {% block content %}
 
 <div class="limiter">

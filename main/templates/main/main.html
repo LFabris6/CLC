@@ -49,7 +49,7 @@
                         
                         &nbsp;&nbsp;&nbsp;
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="/korisnici/{{user}}">{{user}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profil/">Profil - {{user}}</a></li>
                         {%else%}
                         <li class="nav-item"><a class="nav-link">Niste prijavljeni</a></li>
                         {%endif%}
@@ -137,7 +137,7 @@
                         <a class="portfolio-box" href="{%static 'img/dronpp.png' %}" title="Dron">
                             <img class="img-fluid" src="{%static 'img/dronpp.png' %}" alt="..." />
                             <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Kategorija</div>
+                                <div class="project-category text-white-50">Category</div>
                                 <div class="project-name">Radimo snažne dronove od najkvalitetnijih materijala koji će prenositi hranu.</div>
                             </div>
                         </a>

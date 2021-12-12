@@ -3,9 +3,34 @@ from django.http.response import Http404
 from django.contrib.auth.models import User
 from django.http import request
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, LoginForm
+from .forms import NewUserForm, LoginForm, Profil
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
+from .models import Korisnik
+
+from .funkcije import signup, signin
+
+
+
+def test(request):
+    usr = request.user
+    if(request.method=='POST'):
+        form = Profil(request.POST)
+        if form.is_valid():
+            for i in polja:
+                if form.cleaned_data.get(i):
+                    usr()
+                    print()
+
+
+    else:
+        form = Profil()
+
+
+
+    args = {"form":form}
+    return render(request, 'main/test.html', args)
+
 
 
 def main(request):
@@ -93,14 +118,31 @@ def racun(request, nacin):
     
     raise Http404
     
+polja = ["ime", "prezime", "adresa", "telefon"]
 
-def account(request, username):
+def account(request):
 
-    try:
-        usr = User.objects.get(username=username)
-    except:
-        raise Http404
+    usr = Korisnik.objects.get(user=request.user)
+    user = request.user
     
-    args = {'korisnik':usr}
+    if(request.method=='POST'):
+        form = Profil(request.user, request.POST)
+        if form.is_valid():
+            
+            for i in polja:
+                izmjena = form.cleaned_data[i]
+                if(izmjena):            
+                    print(izmjena)        
+                    usr.__setattr__(i, izmjena)
+                    usr.save()
+                   
+
+            
+            return redirect('/profil/')
+    else:
+        form = Profil(request.user)
+
+    
+    args = {'korisnik':usr, "form":form}
     return render(request, 'main/acc.html', args)
 
