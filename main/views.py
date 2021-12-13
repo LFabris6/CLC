@@ -116,7 +116,7 @@ def racun(request, nacin):
     
     raise Http404
     
-polja = ["ime", "prezime", "adresa", "telefon"]
+polja = ["ime", "prezime", "adresa", "telefon", "sirina", "duzina"]
 
 def account(request):
 
