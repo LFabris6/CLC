@@ -15,6 +15,7 @@ def narudzba(request):
     
     for i in usr._meta.get_fields():
         if getattr(usr, i.name) == "":
+            print(i.name)
             messages.error(request, "Molimo vas unesite potrebne podatke")
             return redirect("/profil")
     

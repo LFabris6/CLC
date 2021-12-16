@@ -11,5 +11,4 @@ class Korisnik(models.Model):
     sirina = models.FloatField(null=True)
     duzina = models.FloatField(null=True)
     regija = models.CharField(max_length=50, blank=True)
-    grad = models.CharField(max_length=50, blank=True)
     drzava = models.CharField(max_length=50, blank=True)

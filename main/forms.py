@@ -33,7 +33,7 @@ class NewUserForm(UserCreationForm):
 
         if commit:
             user.save()
-            profilna = Korisnik(user=user)
+            profilna = Korisnik(user=user, drzava="Hrvatska", regija="Istra")
             profilna.save()
         return user
 
