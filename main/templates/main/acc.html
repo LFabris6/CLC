@@ -39,6 +39,17 @@
 
 
 <br>
+
+
+{% if messages %}
+<br><br>
+        		<ul class="alert alert-danger text-center" role="alert">
+                    {% for message in messages %}
+            		{{ message }}
+            		{% endfor %}
+        		</ul>
+        		{% endif %}
+
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 ">
@@ -65,33 +76,34 @@
                     <div class="col-md-12"><label class="labels">Adresa</label>{{form.adresa}}</div>
                     <div class="col-md-12"><label class="labels">Email</label>{{form.email}}</div>
 
-                    <div class="container" style="padding-top: 10px;"><p class="text-muted">Vrlo nam je važno imati točnu lokaciju.<br> Geografsku širinu i dužinu možete samostalno unijeti ili koristiti automatsko lociranje.<br>Molimo vas provijerite lokaciju na mapi te ukoliko automatsko lociranje nije točno, ispravite.</
-                    </p></div>
-                    <div class="col-md-12 text-center"><button onclick="getLocation()" class="btn btn-info">GEO Lociranje</button></div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Geo. Širina</label>{{form.sirina}}</div>
-                        <div class="col-md-6"><label class="labels">Geo. Dužina</label>{{form.duzina}}</div>
-                    </div><br>
-                    <p class="text-muted">Vaša lokacija označena je ikonom:</p>
-                    <br>
-                    <div id="map"></div>
-
-                    
-                    <script
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0zenvZnCkMVJNRXDrU-oSfSLos56B6iU&callback=initMap&libraries=&v=weekly"
-                    async
-                    ></script>
-                    
-
                     
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Država</label><input type="text" class="form-control" placeholder="Država" value="" disabled></div>
-                    <div class="col-md-6"><label class="labels">Regija</label><input type="text" class="form-control" value="" placeholder="Regija" disabled></div>
+                    <div class="col-md-6"><label class="labels">Država</label><input type="text" class="form-control" placeholder="Hrvatska" value="" disabled></div>
+                    <div class="col-md-6"><label class="labels">Regija</label><input type="text" class="form-control" value="" placeholder="Istarska" disabled></div>
                 </div>
-            
+                <div class="container" style="padding-top: 10px;"><p class="text-muted">Vrlo nam je važno imati točnu lokaciju.<br> Geografsku širinu i dužinu možete samostalno unijeti ili koristiti automatsko lociranje.<br>Molimo vas provijerite lokaciju na mapi te ukoliko automatsko lociranje nije točno, ispravite.</
+                </p></div>
+                
+                
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Geo. Širina</label>{{form.sirina}}</div>
+                    <div class="col-md-6"><label class="labels">Geo. Dužina</label>{{form.duzina}}</div>
+                </div>
                 <div class="mt-5 text-center"><button type="submit" id="sbmt" class="btn btn-primary profile-button" type="button">Spremi Promjene</button></div>
-            </form>
+              </form><br>
+              <div class="col-md-12 text-center"><button onclick="getLocation()"class="btn btn-info">GEO Lociranje</button></div><br>
+            
+            
+            <p class="text-muted">Vaša lokacija označena je ikonom:</p>
+            <br>
+            <div id="map"></div><br>
+            
+          
+            <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0zenvZnCkMVJNRXDrU-oSfSLos56B6iU&callback=initMap&libraries=&v=weekly"
+            async
+            ></script>
 
             </div>
         </div>
@@ -101,7 +113,7 @@
 
 
 <script>
-  
+    
     
     function getLocation() {
       if (navigator.geolocation) {
@@ -110,9 +122,9 @@
     }
     
     function showPosition(position) {
-        document.getElementById("id_sirina").value = position.coords.latitude;
-        document.getElementById("id_duzina").value = position.coords.longitude;
-        document.profilna.submit();
+      document.getElementById("id_sirina").value = position.coords.latitude;
+      document.getElementById("id_duzina").value = position.coords.longitude;
+      
         
         const uluru = { lat: position.coords.latitude, lng: position.coords.longitude };
       // The map, centered at Uluru

@@ -10,23 +10,30 @@ from .models import Korisnik
 
 
 
+def narudzba(request):
+    usr = Korisnik.objects.get(user=request.user)
+    
+    for i in usr._meta.get_fields():
+        if getattr(usr, i.name) == "":
+            messages.error(request, "Molimo vas unesite potrebne podatke")
+            return redirect("/profil")
+    
+    messages.success(request, "Hvala vam, zaprimili smo vašu narudžbu, biti će izvršena u što kraćem roku!")
+    return redirect("/demo")
+
+
 def test(request):
-    usr = request.user
-    if(request.method=='POST'):
-        form = Profil(request.POST)
-        if form.is_valid():
-            for i in polja:
-                if form.cleaned_data.get(i):
-                    usr()
-                    print()
+    usr = Korisnik.objects.get(user=request.user)
+    
+    for i in usr._meta.get_fields():
+        if getattr(usr, i.name) == "":
+            messages.error(request, "Molimo vas unesite potrebne podatke")
+            return redirect("/profil")
+    
+    messages.success(request, "Hvala vam, zaprimili smo vašu narudžbu, biti će izvršena u što kraćem roku!")
 
 
-    else:
-        form = Profil()
-
-
-
-    args = {"form":form}
+    args = {}
     return render(request, 'main/test.html', args)
 
 
@@ -36,8 +43,9 @@ def main(request):
     return render(request, 'main/main.html', args)
 
 def demo(request):
+    
     args = {}
-    return render(request, 'main/demo2.html', args)
+    return render(request, 'main/demo.html', args)
 
 def racun(request, nacin):
     
@@ -96,7 +104,7 @@ def racun(request, nacin):
                 if user is not None:
                     
                     login(request, user)
-                    return redirect('/')
+                    return redirect('/demo')
                 else:
                     messages.error(request, "Pogrešna lozinka ili email adresa" )
 
@@ -111,7 +119,7 @@ def racun(request, nacin):
     elif nacin=="odjava":
 
         logout(request)
-        return redirect("/")
+        return redirect("/demo")
 
     
     raise Http404
@@ -126,6 +134,7 @@ def account(request):
     if(request.method=='POST'):
         form = Profil(request.user, request.POST)
         if form.is_valid():
+            print(request)
             
             for i in polja:
                 izmjena = form.cleaned_data[i]

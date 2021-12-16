@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.main, name="home"),
     path('test/', views.test, name="home"),
     path('demo/', views.demo, name="demo"),
-   
+    path('narudzba/', views.narudzba, name="narudzba"),
     path('korisnik/<str:nacin>/', views.racun, name="signup"),
     path('profil/', views.account, name="account"),
 ]
