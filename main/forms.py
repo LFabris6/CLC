@@ -37,6 +37,7 @@ class NewUserForm(UserCreationForm):
             profilna = Korisnik(user=user, drzava="Hrvatska", regija="Istra")
             profilna.save()
             narudzba = Narudzba(user=user)
+            narudzba.save()
         return user
 
 
