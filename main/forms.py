@@ -1,9 +1,10 @@
 
+
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
-from .models import Korisnik
+from .models import Korisnik, Narudzba
 
 class NewUserForm(UserCreationForm):
 
@@ -35,6 +36,7 @@ class NewUserForm(UserCreationForm):
             user.save()
             profilna = Korisnik(user=user, drzava="Hrvatska", regija="Istra")
             profilna.save()
+            narudzba = Narudzba(user=user)
         return user
 
 
@@ -53,6 +55,7 @@ class Profil(forms.Form):
     email = forms.CharField(max_length=50, required=False)
     sirina = forms.FloatField(required=False)
     duzina = forms.FloatField(required=False)
+    
 
 
     def __init__(self, user, *args, **kwargs):
@@ -65,6 +68,7 @@ class Profil(forms.Form):
             visible.field.widget.attrs['class'] = 'form-control'
 
         korisnik = Korisnik.objects.get(user=user)
+        
 
         self.fields['ime'].widget.attrs['placeholder'] = self.fields['ime'].label or korisnik.ime
         self.fields['prezime'].widget.attrs['placeholder'] = self.fields['prezime'].label or korisnik.prezime
@@ -73,3 +77,10 @@ class Profil(forms.Form):
         self.fields['email'].widget.attrs['placeholder'] = self.fields['email'].label or user.email
         self.fields['sirina'].widget.attrs['placeholder'] = self.fields['sirina'].label or korisnik.sirina
         self.fields['duzina'].widget.attrs['placeholder'] = self.fields['duzina'].label or korisnik.duzina
+
+
+class Upit(forms.Form):
+    ime = forms.CharField(max_length=50)
+    email = forms.EmailField(max_length=50)
+    telefon= forms.IntegerField()
+    prouka = forms.TextInput()

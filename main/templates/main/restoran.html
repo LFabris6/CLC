@@ -1,0 +1,76 @@
+
+{% extends "main/navbar.html" %}
+{% load static %}
+
+{%block imports%}
+<link href="{%static 'css/cards2.css'%}" rel="stylesheet" />
+{%endblock%}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<br><br><br>
+{% if messages %}
+
+<div class="message">
+        		<ul class="alert alert-success text-center" role="alert">
+                    {% for message in messages %}
+            		{{ message }}<br>
+            		{% endfor %}
+        		</ul>
+</div>
+{% endif %}
+<section class="section-products">
+  <div class="container">
+      <div class="row justify-content-center text-center">
+          <div class="col-md-8 col-lg-6">
+              <div class="header">
+                  <h3>{{rs.ime}}</h3>
+                  <h2>Istaknuta jela:</h2>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <!-- Single Product -->
+          {%for jelo in jela %}
+          <div class="col-md-6 col-lg-4 col-xl-3">
+              <div id="product-1" class="single-product">
+                <div class="part-1" style="background: url(/static/img/ai.png) no-repeat center; background-size: cover;
+                transition: all 0.3s;">
+                      <ul>
+                          <a href="/kosarica/dodaj/{{jelo.id}}" class="btn btn-light">Dodaj</a>
+                         
+                      </ul>
+                  </div>
+                  <div class="part-2">
+                      <h3 class="product-title">{{jelo.ime}}</h3>
+					  <h4 class="product-price">{{jelo.cijena}}kn</h4>
+                      {{jelo.slika}}
+					  
+                  
+                  </div>
+              </div>
+          </div>
+          <!-- Single Product -->
+          {%endfor%}
+      </div>
+  </div>
+</section>
+{%else%}
+<p style="font-weight: bold;" class="text-muted text-center">Trebate imati korisnički račun prije nego što možete napraviti narudžbu.</p>
+{%endif%}
+<script>
+	$(document).ready(function() {
+		// messages timeout for 10 sec 
+		setTimeout(function() {
+			$('.message').fadeOut('slow');
+		}, 1000); 
+
+		// delete message
+		$('.del-msg').live('click',function(){
+			$('.del-msg').parent().attr('style', 'display:none;');
+		})
+	});
+</script>
+{%endblock content %}
+

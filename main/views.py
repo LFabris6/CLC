@@ -1,51 +1,103 @@
-
 from django.http.response import Http404
 from django.contrib.auth.models import User
 from django.http import request
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, LoginForm, Profil
+from .forms import NewUserForm, LoginForm, Profil, Upit
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from .models import Korisnik
+from .models import Korisnik, Narudzba, Restoran, Jelo
 
 
+
+def dodaj(request, qry, jelo):
+
+    usr = Korisnik.objects.get(user=request.user)
+    for i in usr._meta.get_fields():
+        if getattr(usr, i.name) == "":
+            messages.error(request, "Molimo vas unesite potrebne podatke")
+            return redirect("/profil")
+    
+    
+    jelo = Jelo.objects.get(id=jelo)
+    narudzba = Narudzba.objects.get(user=request.user)
+    if qry == "dodaj":
+        narudzba.meni.add(jelo)
+        narudzba.ukupno+=jelo.cijena
+        narudzba.save()
+        messages.success(request, "Jelo je dodano u vašu košaricu!")
+        return redirect("/restoran/"+jelo.restoran.ime)
+    if qry == "izbaci":
+        narudzba.meni.remove(jelo)
+        narudzba.ukupno-=jelo.cijena
+        narudzba.save()
+        messages.success(request, "Jelo je izbačeno iz košarice")
+        return redirect("/lista")
+
+    return Http404
+    
+
+
+def kosarica(request):
+    user = request.user
+    narudzba =  Narudzba.objects.get(user=request.user)
+    
+    return render(request, 'main/kosarica.html', {"narudzba":narudzba})
+
+def restoran(request, ime):
+    rs = Restoran.objects.get(ime=ime)
+
+    #sav meni:
+    jela = rs.jelo_set.all()
+    
+    
+    args = {"rs":rs, "jela":jela}
+    return render(request, "main/restoran.html", args)
 
 def narudzba(request):
     usr = Korisnik.objects.get(user=request.user)
     
     for i in usr._meta.get_fields():
         if getattr(usr, i.name) == "":
-            print(i.name)
             messages.error(request, "Molimo vas unesite potrebne podatke")
             return redirect("/profil")
     
-    messages.success(request, "Hvala vam, zaprimili smo vašu narudžbu, biti će izvršena u što kraćem roku!")
-    return redirect("/demo")
+    #izlistaj
+    nard = Narudzba.objects.get(user=request.user)
+    if nard.potvrdeno is False:
+        nard.potvrdeno = True
+        nard.save()
+        messages.success(request, "Hvala vam, Zaprimili smo vašu narudžbu te će biti izvršena u što kraćem roku.")
+    else:
+        messages.warning(request, "Vaša narudzba već je u tijeku.")
+    print("dd")
 
-
-def test(request):
-    usr = Korisnik.objects.get(user=request.user)
     
-    for i in usr._meta.get_fields():
-        if getattr(usr, i.name) == "":
-            messages.error(request, "Molimo vas unesite potrebne podatke")
-            return redirect("/profil")
     
-    messages.success(request, "Hvala vam, zaprimili smo vašu narudžbu, biti će izvršena u što kraćem roku!")
+    return redirect("/lista/")
 
 
-    args = {}
-    return render(request, 'main/test.html', args)
 
 
 
 def main(request):
-    args = {}
+    if request.method == "POST":
+        form = Upit(request.POST)
+        if form.is_valid():
+            #startat smtp server
+            email = form.cleaned_data.get('email')
+            ime = form.cleaned_data.get('ime')
+            telefon = form.cleaned_data.get('telefon')
+            poruka = form.cleaned_data.get('poruka')
+    else:
+        form = Upit()
+
+
+    args = {"form":form}
     return render(request, 'main/main.html', args)
 
 def demo(request):
-    
-    args = {}
+    restorani = Restoran.objects.filter(grad="Rovinj")
+    args = {"restorani":restorani}
     return render(request, 'main/demo.html', args)
 
 def racun(request, nacin):
@@ -69,7 +121,8 @@ def racun(request, nacin):
                             
                     user = authenticate(username=username, password=pswd1)
                     login(request, user)
-                    return redirect('/')
+                    messages.success(request, "Dobro došli!")
+                    return redirect('/demo/')
                 else:
                     messages.error(request, "Korisnik sa tom email adresom je već registriran!")
             else:
@@ -105,6 +158,7 @@ def racun(request, nacin):
                 if user is not None:
                     
                     login(request, user)
+                    messages.success(request, "Dobro došli natrag!")
                     return redirect('/demo')
                 else:
                     messages.error(request, "Pogrešna lozinka ili email adresa" )

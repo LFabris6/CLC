@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Dron</title>
+        <title>FoodKopter</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Boostrap -->
@@ -32,16 +32,16 @@
     <body>
         <nav  class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand"  id="logg" href="#page-top">Dron</a>
+                <a class="navbar-brand"  id="logg" href="#page-top">FoodKopter</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Početna</a></li>
                         
-                        <li class="nav-item"><a class="nav-link" href="/demo/">Demo</a></li>
+                        
                      
-                        <li class="nav-item"><a class="nav-link" href="/korisnici/{{user}}">Korisnički račun</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/#contact">Kontakt</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="/demo/">Restorani</a></li>
                         &nbsp;&nbsp;
                         {% if user.is_authenticated %}
                         
@@ -54,6 +54,7 @@
                         &nbsp;&nbsp;&nbsp;
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="/profil/">Profil - {{user}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/lista/">Košarica</a></li>
                         {%else%}
                         <li class="nav-item"><a class="nav-link">Niste prijavljeni</a></li>
                         {%endif%}

@@ -1,298 +1,187 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Dron</title>
-        
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-        
-        <link href="{%static 'css/styles1.css'%}" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#page-top">Dron</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#about">O nama</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Tehnologije</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Galerija</a></li>
-                        
-                        <li class="nav-item"><a class="nav-link" href="#tim">Tim</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#demo">Demo</a></li>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        
 
-                        
-                        {% if user.is_authenticated %}
-                        
-                        <li class="nav-item"><a class="nav-link" href="/korisnik/odjava">Odjava</a></li>
-                        {%else%}
-                        <li class="nav-item"><a class="nav-link" href="/korisnik/registracija">Registracija</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/korisnik/prijava/">Prijava</a></li>
-                        {%endif%}
-                        
-                        &nbsp;&nbsp;&nbsp;
-                        {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="/profil/">Profil - {{user}}</a></li>
-                        {%else%}
-                        <li class="nav-item"><a class="nav-link">Niste prijavljeni</a></li>
-                        {%endif%}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">Dron</h1>
-                        <hr class="divider" />
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">Brza dostava hrane</p>
-                        <a class="btn btn-primary btn-xl" href="#about">O nama</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- About-->
-        <section class="page-section bg-primary" id="about">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <h2 class="text-white mt-0">Naša vizija</h2>
-                        <hr class="divider divider-light" />
-                        <p class="text-white-75 mb-4">Danas je očito da su dronovi budućnost mnogih djelatnosti, pogotovo dostave hrane.<br>Mi izrađujemo
-                        dronove pod minimalističkim imenom dron koji će dovesti industriju dostave hrane na višu razinu i približiti je modernim tehnologijama.<br>
-                        Mi se zagovaramo za najbržu i najkvalitetniju dostavu hrane sa beskontaknim plaćanjem.<br>
-                        Naš projekt proizazvati će dodatne inovacije na hrvatskom tržištu, ne samo u grani dostave hrane već u cijeloj industriji tehnologije.
-                        
-                        </p>
-                        <a class="btn btn-light btn-xl" href="#services">Tehnologije</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Services-->
-        <section class="page-section" id="services">
-            <div class="container px-4 px-lg-5">
-                <h2 class="text-center mt-0">Tehnologije</h2>
+{% extends "main/navbar.html" %}
+
+{% load static %}
+
+{% block imports %}
+<link href="{%static 'css/styles1.css'%}" rel="stylesheet" />
+{% endblock imports%}
+
+{% block content %}
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                <h1 class="text-white font-weight-bold">Dron</h1>
                 <hr class="divider" />
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i><img src="{%static 'img/drone.png' %}" width="70", height="70" ></i></div>
-                            <h3 class="h4 mb-2">Robotika</h3>
-                            <p class="text-muted mb-0">Izrađujemo snažne droniove koji će dostavljati hranu.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i><img src="{%static 'img/ai.png' %}" width="70", height="70" ></i></div>
-                            <h3 class="h4 mb-2">Umjetna inteligencija</h3>
-                            <p class="text-muted mb-0">Izrađujemo modele umjetne inteligencije za razne poslove, poput detekcije objekata i određivanje ruta.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i><img src="{%static 'img/network.png' %}" width="70", height="70" ></i></div>
-                            <h3 class="h4 mb-2">Pametni sustavi</h3>
-                            <p class="text-muted mb-0">Dron komunicira sa web serverom,
-                            Uz GPS sustav kordinira se u prostoru i organizira rute za dostavu. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i><img src="{%static 'img/uis.png' %}" width="70", height="70" ></i></div>
-                            <h3 class="h4 mb-2">Korisničko sučelje</h3>
-                            <p class="text-muted mb-0">Dron osim što dostavlja hranu, informira korisnike o statusu dostave i dijei svoju lokaciju.</p>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <p class="text-white-75 mb-5">Brza dostava hrane</p>
+                <a class="btn btn-primary btn-xl" href="#about">O nama</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="page-section bg-primary" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white mt-0">Naša vizija</h2>
+                <hr class="divider divider-light" />
+                <p class="text-white-75 mb-4">Danas je očito da su dronovi budućnost mnogih djelatnosti, pogotovo dostave hrane.<br>Mi izrađujemo
+                dronove pod minimalističkim imenom dron koji će dovesti industriju dostave hrane na višu razinu i približiti je modernim tehnologijama.<br>
+                Mi se zagovaramo za najbržu i najkvalitetniju dostavu hrane sa beskontaknim plaćanjem.<br>
+                Naš projekt proizazvati će dodatne inovacije na hrvatskom tržištu, ne samo u grani dostave hrane već u cijeloj industriji tehnologije.
+                
+                </p>
+                <a class="btn btn-light btn-xl" href="#services">Tehnologije</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services-->
+<section class="page-section" id="services">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-center mt-0">Tehnologije</h2>
+        <hr class="divider" />
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i><img src="{%static 'img/drone.png' %}" width="70", height="70" ></i></div>
+                    <h3 class="h4 mb-2">Robotika</h3>
+                    <p class="text-muted mb-0">Izrađujemo snažne droniove koji će dostavljati hranu.</p>
                 </div>
             </div>
-        </section>
-        <!-- Portfolio-->
-        <div id="portfolio">
-            <div class="container-fluid p-0">
-                <div class="row g-0">
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{%static 'img/dronpp.png' %}" title="Dron">
-                            <img class="img-fluid" src="{%static 'img/dronpp.png' %}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Category</div>
-                                <div class="project-name">Radimo snažne dronove od najkvalitetnijih materijala koji će prenositi hranu.</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{%static 'img/nvidia.jpg' %}" title="AI">
-                            <img class="img-fluid" src="{%static 'img/nvidia.jpg' %}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Umjetna Inteligencija</div>
-                                <div class="project-name">Koristimo NVIDIA sisteme za integriramo sustave umjetne inteligencije.</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{%static 'img/ui.png' %}" title="UI">
-                            <img class="img-fluid" src="{%static 'img/ui.png' %}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">Korisničko Sučelje</div>
-                                <div class="project-name">Informiramo korisnike o dostavi.</div>
-                            </div>
-                        </a>
-                    </div>
-                    
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i><img src="{%static 'img/ai.png' %}" width="70", height="70" ></i></div>
+                    <h3 class="h4 mb-2">Umjetna inteligencija</h3>
+                    <p class="text-muted mb-0">Izrađujemo modele umjetne inteligencije za razne poslove, poput detekcije objekata i određivanje ruta.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i><img src="{%static 'img/network.png' %}" width="70", height="70" ></i></div>
+                    <h3 class="h4 mb-2">Pametni sustavi</h3>
+                    <p class="text-muted mb-0">Dron komunicira sa web serverom,
+                    Uz GPS sustav kordinira se u prostoru i organizira rute za dostavu. </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <div class="mb-2"><i><img src="{%static 'img/uis.png' %}" width="70", height="70" ></i></div>
+                    <h3 class="h4 mb-2">Korisničko sučelje</h3>
+                    <p class="text-muted mb-0">Dron osim što dostavlja hranu, informira korisnike o statusu dostave i dijei svoju lokaciju.</p>
                 </div>
             </div>
         </div>
-        <br><br>
-        <section id="demo">
-            <div class="text-center">
-                <a href="/demo/" style="text-decoration:none;"><h1>Demo verzija</h1></a>
-                <p> Na sljedećoj stranici možete vidjeti primjer naručivanje hrane iz izbora restorana.<br>
-                Na listi je samo 1 restoran i njegova lokacija je predefinirana kao i što će biti u produkciji<br>
-                Jedina potrebna informacija je lokacija korisnika, koja može biti podjeljena ili korisnik može upisati adresu</p>
-
+    </div>
+</section>
+<!-- Portfolio-->
+<div id="portfolio">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="{%static 'img/dronpp.png' %}" title="Dron">
+                    <img class="img-fluid" src="{%static 'img/dronpp.png' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Category</div>
+                        <div class="project-name">Radimo snažne dronove od najkvalitetnijih materijala koji će prenositi hranu.</div>
+                    </div>
+                </a>
             </div>
-
-        </section>
-        <section class="page-section bg-grey text-black">
-            <div class="container px-4 px-lg-5 text-center">
-                <h2 class="mb-4">Dron i ostali projekti na Githubu</h2> 
-                <a href='https://github.com/LFabris6/CLC'><img src="{%static 'img/github.png'%}", width="70", height="70"></a>
-                <br>
-                <small class="text-muted">Dron</small>
-                
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="{%static 'img/nvidia.jpg' %}" title="AI">
+                    <img class="img-fluid" src="{%static 'img/nvidia.jpg' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Umjetna Inteligencija</div>
+                        <div class="project-name">Koristimo NVIDIA sisteme za integriramo sustave umjetne inteligencije.</div>
+                    </div>
+                </a>
             </div>
-        </section>
-        <section class="testimonials text-center ", id='tim'>
-            <div class="container">
-                <h2 class="mb-5">Naš Tim</h2>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="{%static 'img/default.jpg'%}", width="150", height="150" alt="..." />
-                            <h5>Leonard Fabris</h5>
-                            <p class="font-weight-light mb-0">AI i Robotski sustavi</p>
-                        </div>
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="{%static 'img/ui.png' %}" title="UI">
+                    <img class="img-fluid" src="{%static 'img/ui.png' %}" alt="..." />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">Korisničko Sučelje</div>
+                        <div class="project-name">Informiramo korisnike o dostavi.</div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="{%static 'img/default.jpg'%}", width="150", height="150" alt="..." />
-                            <h5>Lovro Šverko</h5>
-                            <p class="font-weight-light mb-0">Mentor</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="{%static 'img/default.jpg'%}", width="150", height="150" alt="..." />
-                            <h5>Ostali suradnici</h5>
-                            <p class="font-weight-light mb-0">Tijekom projekta, svoja znanja i vještine pruzati ce prijatelji i obitelj koji se bave sličnim projektima.</p>
-                        </div>
-                    </div>
-                
-                    
-                    
-                    
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<br><br>
+<section id="demo">
+    <div class="text-center">
+        <a href="/demo/" style="text-decoration:none;"><h1>Demo verzija</h1></a>
+        <p> Na sljedećoj stranici možete vidjeti primjer naručivanje hrane iz izbora restorana.<br>
+        Na listi je samo 1 restoran i njegova lokacija je predefinirana kao i što će biti u produkciji<br>
+        Jedina potrebna informacija je lokacija korisnika, koja može biti podjeljena ili korisnik može upisati adresu</p>
+
+    </div>
+
+</section>
+<section class="page-section bg-grey text-black">
+    <div class="container px-4 px-lg-5 text-center">
+        <h2 class="mb-4">Dron i ostali projekti na Githubu</h2> 
+        <a href='https://github.com/LFabris6/CLC'><img src="{%static 'img/github.png'%}", width="70", height="70"></a>
+        <br>
+        <small class="text-muted">Dron</small>
+        
+    </div>
+</section>
+<section class="testimonials text-center ", id='tim'>
+    <div class="container">
+        <h2 class="mb-5">Naš Tim</h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="{%static 'img/default.jpg'%}", width="150", height="150" alt="..." />
+                    <h5>Leonard Fabris</h5>
+                    <p class="font-weight-light mb-0">AI i Robotski sustavi</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="{%static 'img/default.jpg'%}", width="150", height="150" alt="..." />
+                    <h5>Lovro Šverko</h5>
+                    <p class="font-weight-light mb-0">Mentor</p>
                 </div>
             </div>
             
-        </section>
-        <!-- Contact-->
-        <section class="page-section" id="contact">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 col-xl-6 text-center">
-                        <h2 class="mt-0">Kontaktirajte nas!</h2>
-                        <hr class="divider" />
-                        <p class="text-muted mb-5">Jeste li spremni surađivati sa nama? Pošaljite nam poruku i mi ćemo Vam se javiti u najkraćem mogućem roku!</p>
-                    </div>
-                </div>
-                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-                    <div class="col-lg-6">
-                        
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                <label for="name">Ime</label>
-                                <div class="invalid-feedback" data-sb-feedback="name:required">Molimo vas upišite ime.</div>
-                            </div>
-                    
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">Email adresa</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">Email adresa</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email adresa nije ispravna<div>
-                            </div>
-                         
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                                <label for="phone">Broj telefona</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">Potrebno je upisati broj telefona.</div>
-                            </div>
-                            
-                            <div class="form-floating mb-3">
-                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                                <label for="message">Poruka</label>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">Molimo vas upišite poruku.</div>
-                            </div>
-                           
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">Poruka je uspješno poslana!</div>
-                                    
-                                </div>
-                            </div>
-                           
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Nastao je problem prilikom slanja poruke.Molimo vas pokušajte ponovno</div></div>
-                        
-                            <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Pošalji</button></div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-4 text-center mb-5 mb-lg-0">
-                        <i class="bi-phone fs-2 mb-3 text-muted"></i>
-                        <div>drondostava@gmail.com</div>
-                    </div>
+            <div class="col-lg-4">
+                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="{%static 'img/default.jpg'%}", width="150", height="150" alt="..." />
+                    <h5>Ostali suradnici</h5>
+                    <p class="font-weight-light mb-0">Tijekom projekta, svoja znanja i vještine pruzati ce prijatelji i obitelj koji se bave sličnim projektima.</p>
                 </div>
             </div>
-        </section>
-        <footer class="bg-light py-5">
-            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - Dron</div></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- SimpleLightbox plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{%static 'js/scripts.js'%}"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         
-    </body>
-</html>
+            
+            
+            
+        </div>
+    </div>
+    
+</section>
+
+<section id="kontakt">
+    <footer id="kontakt" class="bg-light py-5">
+    <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - Dron</div>
+    <div class="small text-center text-muted">drondostava@gmail.com</div></div>
+    
+</footer>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+<script src="{%static 'js/scripts.js'%}"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+{% endblock content %}
+
+
