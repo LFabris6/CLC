@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8@fz4&n3)gz*1yk6tecf80dp4tsi)2zh5ehx3#nteeechx%o=p'
 
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', 'foodcopter.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'clcdron-1d593f9dbf99.herokuapp.com']
 
 
 INSTALLED_APPS = [
